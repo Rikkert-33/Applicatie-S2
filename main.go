@@ -52,20 +52,18 @@ func KentekenCheck() {
 			break
 		}
 	}
-
-	// Toon het juiste bericht op basis van of het kenteken aanwezig is of niet
 	if found {
-		fmt.Println("Welkom op het parkeerterrein.")
 		status = true
-	} else {
-		fmt.Println("Je hebt helaas geen toegang tot het parkeerterrein.")
 	}
 }
 
 func main() {
 	KentekenCheck()
 	if status == true {
+		fmt.Println("Welkom op het parkeerterrein.")
 		welcomeMessage = Welcome(welcomeMessage)
 		fmt.Println(welcomeMessage)
+	} else {
+		fmt.Println("Je hebt helaas geen toegang tot het parkeerterrein.")
 	}
 }
