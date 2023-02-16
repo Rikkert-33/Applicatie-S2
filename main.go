@@ -9,18 +9,29 @@ import (
 )
 
 var CurrentTime int = 0
+var status bool = false
+var welcomeMessage string = ""
 
-func TimeCheck() {
+func Welcome(welcomeMessage string) string {
 	CurrentTime := time.Now().Format("15")
 	if CurrentTime >= "7" && CurrentTime < "12" {
-		fmt.Println("Goede morgen!")
+		//fmt.Println("Goede morgen!")
+		welcomeMessage = "Goede morgen!"
+		return welcomeMessage
 	} else if CurrentTime > "12" && CurrentTime < "18" {
-		fmt.Println("Goede middag!")
+		//fmt.Println("Goede middag!")
+		welcomeMessage = "Goede middag!"
+		return welcomeMessage
 	} else if CurrentTime > "18" && CurrentTime < "23" {
-		fmt.Println("Goede avond!")
+		//fmt.Println("Goede avond!")
+		welcomeMessage = "Goede avond!"
+		return welcomeMessage
 	} else if CurrentTime > "23" && CurrentTime < "7" {
-		fmt.Println("Sorry, de parkeerplaats is snachts gesloten")
+		//fmt.Println("Sorry, de parkeerplaats is snachts gesloten")
+		welcomeMessage = "Sorry, de parkeerplaats is snachts gesloten"
+		return welcomeMessage
 	}
+	return ""
 }
 
 func KentekenCheck() {
@@ -45,8 +56,7 @@ func KentekenCheck() {
 	// Toon het juiste bericht op basis van of het kenteken aanwezig is of niet
 	if found {
 		fmt.Println("Welkom op het parkeerterrein.")
-		//TimeCheck staat hier vanwege het moment dat "Goedendag" wordt aangeroepen. Dit moet pas gebeuren als het kenteken is gecontroleerd.
-		TimeCheck()
+		status = true
 	} else {
 		fmt.Println("Je hebt helaas geen toegang tot het parkeerterrein.")
 	}
@@ -54,5 +64,8 @@ func KentekenCheck() {
 
 func main() {
 	KentekenCheck()
-	//TimeCheck staat in de KentekenCheck omdat het moment dat "Goedendag" wordt aangeroepen afhankelijk is van het kenteken.
+	if status == true {
+		welcomeMessage = Welcome(welcomeMessage)
+		fmt.Println(welcomeMessage)
+	}
 }
